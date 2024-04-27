@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32505.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subdomains", "Subdomains", "{DA2E7D89-7803-4690-B7B1-EB337FECC9A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DF8A6A41-D578-4104-8B47-4E2630E0B677}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Supportive", "Supportive", "{0187E7BD-6D7E-476C-8E25-B4FA55E5631F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StockMarket", "StockMarket", "{B8DCF476-274B-4B70-97BF-2F89E3C23D81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.StockMarket.Application", "StockMarket.Subdomains.Core.StockMarket.Application\Core.StockMarket.Application.csproj", "{4703DD4C-8FEA-42CF-9231-2E859CC755C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.StockMarket.Domain", "StockMarket.Subdomains.Core.StockMarket.Domain\Core.StockMarket.Domain.csproj", "{6ABC33F3-C982-457B-9AAB-BF7F0018F3BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.StockMarket.Infrastructure", "StockMarket.Subdomains.Core.StockMarket.Persistence\Core.StockMarket.Infrastructure.csproj", "{A8965FC8-2D33-41BA-AC34-5A35BE93F237}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockMarketApp", "StockMarketApp\StockMarketApp.csproj", "{0D496054-D508-4973-8DA5-B960BF180C9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4703DD4C-8FEA-42CF-9231-2E859CC755C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4703DD4C-8FEA-42CF-9231-2E859CC755C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4703DD4C-8FEA-42CF-9231-2E859CC755C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4703DD4C-8FEA-42CF-9231-2E859CC755C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ABC33F3-C982-457B-9AAB-BF7F0018F3BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ABC33F3-C982-457B-9AAB-BF7F0018F3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ABC33F3-C982-457B-9AAB-BF7F0018F3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ABC33F3-C982-457B-9AAB-BF7F0018F3BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8965FC8-2D33-41BA-AC34-5A35BE93F237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8965FC8-2D33-41BA-AC34-5A35BE93F237}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8965FC8-2D33-41BA-AC34-5A35BE93F237}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8965FC8-2D33-41BA-AC34-5A35BE93F237}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D496054-D508-4973-8DA5-B960BF180C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D496054-D508-4973-8DA5-B960BF180C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D496054-D508-4973-8DA5-B960BF180C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D496054-D508-4973-8DA5-B960BF180C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DF8A6A41-D578-4104-8B47-4E2630E0B677} = {DA2E7D89-7803-4690-B7B1-EB337FECC9A8}
+		{0187E7BD-6D7E-476C-8E25-B4FA55E5631F} = {DA2E7D89-7803-4690-B7B1-EB337FECC9A8}
+		{B8DCF476-274B-4B70-97BF-2F89E3C23D81} = {DF8A6A41-D578-4104-8B47-4E2630E0B677}
+		{4703DD4C-8FEA-42CF-9231-2E859CC755C5} = {B8DCF476-274B-4B70-97BF-2F89E3C23D81}
+		{6ABC33F3-C982-457B-9AAB-BF7F0018F3BD} = {B8DCF476-274B-4B70-97BF-2F89E3C23D81}
+		{A8965FC8-2D33-41BA-AC34-5A35BE93F237} = {B8DCF476-274B-4B70-97BF-2F89E3C23D81}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFD1E86A-6238-4B6A-BBED-9937CDB0B083}
+	EndGlobalSection
+EndGlobal
