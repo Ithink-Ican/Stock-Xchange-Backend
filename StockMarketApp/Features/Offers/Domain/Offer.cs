@@ -6,15 +6,15 @@ namespace StockMarketApp.Features.Offers.Domain
 {
     public class Offer
     {
-        public OfferId Id { get; internal set; }
-        public TraderId TraderId { get; internal set; }
-        public InstrumentId InstrumentId { get; internal set; }
-        public int Amount { get; internal set; }
-        public decimal Price { get; internal set; }
-        public CurrencyId CurrencyId { get; internal set; }
-        public bool IsSale { get; internal set; }
+        public OfferId Id { get; private set; }
+        public TraderId TraderId { get; private set; }
+        public InstrumentId InstrumentId { get; private set; }
+        public int Amount { get; private set; }
+        public decimal Price { get; private set; }
+        public CurrencyId CurrencyId { get; private set; }
+        public bool IsSale { get; private set; }
         public bool IsSatisfied { get; private set; }
-        public DateTime PlacementDate { get; internal set; }
+        public DateTime PlacementDate { get; private set; }
 
         public Offer(TraderId traderId, InstrumentId instrumentId, int amount, decimal price, CurrencyId currencyId, bool isSale)
         {
