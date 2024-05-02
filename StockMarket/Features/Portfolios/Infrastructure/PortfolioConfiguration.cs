@@ -43,8 +43,8 @@ public class PortfolioConfiguration : IEntityTypeConfiguration<Portfolio>
                 .HasConstraintName("portfolio_instrument_id_fkey");
 
         builder.HasOne<Trader>()
-                .WithOne()
-                .HasForeignKey<Trader>(t => t.Id)
+                .WithMany()
+                .HasForeignKey(t => t.TraderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("portfolio_trader_id_fkey");
     }

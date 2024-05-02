@@ -48,6 +48,6 @@ public class AccountConfiguration : IEntityTypeConfiguration<Account>
                 .WithMany()
                 .HasForeignKey(t => t.TraderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("account_currency_id_fkey");
+                .HasConstraintName("account_trader_id_fkey");
     }
 }

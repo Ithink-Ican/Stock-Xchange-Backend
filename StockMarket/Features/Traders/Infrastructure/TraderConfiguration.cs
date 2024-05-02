@@ -14,7 +14,7 @@ public class TraderConfiguration : IEntityTypeConfiguration<Trader>
 
         builder.Property(p => p.Id)
             .HasConversion(
-            portfolioId => portfolioId.Value,
+            traderId => traderId.Value,
             value => new TraderId(value)
             )
             .HasColumnName("id");

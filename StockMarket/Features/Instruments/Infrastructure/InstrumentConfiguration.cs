@@ -62,7 +62,7 @@ public class InstrumentConfiguration : IEntityTypeConfiguration<Instrument>
 
         builder.HasOne<Issuer>()
                 .WithMany()
-                .HasForeignKey(iS => iS.IndustryId)
+                .HasForeignKey(iS => iS.IssuerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("issuer_id_fkey");
     }

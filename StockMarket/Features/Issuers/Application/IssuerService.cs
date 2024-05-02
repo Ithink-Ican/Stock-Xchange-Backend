@@ -19,7 +19,7 @@ public class IssuerService
         _issuerRepository = issuerRepository;
     }
     
-    public void CreateIssuer(IssuerDto issuerDto)
+    public void Create(IssuerDto issuerDto)
     {
         var issuer = new Issuer(
             new IssuerId(Guid.NewGuid()),
