@@ -1,4 +1,4 @@
-using StockMarketApp.Shared.Infrastructure;
+using StockMarket.Shared.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.

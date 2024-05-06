@@ -1,4 +1,4 @@
-﻿namespace StockMarketApp.Features.Portfolios.Domain
+﻿namespace StockMarket.Features.Portfolios.Domain
 {
     public record PortfolioId(Guid Value);
 }

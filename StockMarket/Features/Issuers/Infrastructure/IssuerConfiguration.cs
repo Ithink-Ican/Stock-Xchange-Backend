@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StockMarketApp.Features.Issuers.Domain;
+using StockMarket.Features.Issuers.Domain;
 
-namespace StockMarketApp.Features.Issuers.Infrastructure;
+namespace StockMarket.Features.Issuers.Infrastructure;
 public class IssuerConfiguration : IEntityTypeConfiguration<Issuer>
 {
     public void Configure(EntityTypeBuilder<Issuer> builder)

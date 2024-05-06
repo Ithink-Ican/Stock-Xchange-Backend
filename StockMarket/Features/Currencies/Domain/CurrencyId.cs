@@ -1,3 +1,3 @@
-﻿namespace StockMarketApp.Features.Currencies.Domain;
+﻿namespace StockMarket.Features.Currencies.Domain;
 
 public record CurrencyId(Guid Value);

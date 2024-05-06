@@ -1,15 +1,20 @@
-﻿namespace StockMarketApp.Features.Traders.Domain
+﻿using StockMarket.Features.Users.Domain;
+
+namespace StockMarket.Features.Traders.Domain
 {
     public class Trader
     {
+        public Trader()
+        {
+        }
         public TraderId Id { get; private set; }
         public string Name { get; private set; }
         public INN INN { get; private set; }
-        public Guid UserId { get; private set; }
+        public UserId UserId { get; private set; }
 
-        public Trader(string name, INN iNN, Guid userId)
+        public Trader(TraderId id, string name, INN iNN, UserId userId)
         {
-            Id = new TraderId(Guid.NewGuid());
+            Id = id;
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(
@@ -20,7 +25,7 @@
             INN = iNN;
             UserId = userId;
         }
-        public void ChangeAttributes(string name, INN iNN, Guid userId)
+        public void ChangeAttributes(string name, INN iNN, UserId userId)
         {
             if (string.IsNullOrEmpty(name))
             {

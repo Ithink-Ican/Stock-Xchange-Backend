@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StockMarketApp.Features.Deals.Domain;
-using StockMarketApp.Features.Offers.Domain;
+using StockMarket.Features.Deals.Domain;
+using StockMarket.Features.Offers.Domain;
 
-namespace StockMarketApp.Features.Deals.Infrastructure;
+namespace StockMarket.Features.Deals.Infrastructure;
 
 public class DealConfiguration : IEntityTypeConfiguration<Deal>
 {

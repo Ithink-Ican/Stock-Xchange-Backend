@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace StockMarketApp.Features.Issuers.Domain;
+namespace StockMarket.Features.Issuers.Domain;
 public interface IIssuerRepository
 {
     Task Create(Issuer issuer);

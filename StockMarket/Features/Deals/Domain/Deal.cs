@@ -1,6 +1,6 @@
-﻿using StockMarketApp.Features.Offers.Domain;
+﻿using StockMarket.Features.Offers.Domain;
 
-namespace StockMarketApp.Features.Deals.Domain
+namespace StockMarket.Features.Deals.Domain
 {
     public class Deal
     {
@@ -10,10 +10,9 @@ namespace StockMarketApp.Features.Deals.Domain
         public DateTime DealDate { get; private set; }
 
         public static Deal Create(
+            DealId id,
             OfferId sellOfferId,
-            OfferId buyOfferId,
-            int amountToSell,
-            int amountToBuy
+            OfferId buyOfferId
             )
         {
             if (sellOfferId == buyOfferId)
@@ -22,18 +21,9 @@ namespace StockMarketApp.Features.Deals.Domain
                     "Нельзя заключать сделки с самим собой",
                     nameof(sellOfferId));
             }
-            if (amountToSell < amountToBuy)
-            {
-                //sellOffer.PartialSale(buyOffer.Amount);
-            }
-            if (amountToSell == amountToBuy)
-            {
-                //sellOffer.FullSale();
-            }
-            // buyOffer.Satisfy();
             var deal = new Deal()
             {
-                Id = new DealId(Guid.NewGuid()),
+                Id = id,
                 SellOfferId = sellOfferId,
                 BuyOfferId = buyOfferId,
                 DealDate = DateTime.Now

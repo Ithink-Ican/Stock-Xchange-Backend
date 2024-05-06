@@ -1,13 +1,13 @@
-﻿namespace StockMarketApp.Features.UserTypes.Domain
+﻿namespace StockMarket.Features.UserTypes.Domain
 {
     public class UserType
     {
         public UserTypeId Id { get; private set; }
         public string Name { get; private set; }
 
-        public UserType(string name)
+        public UserType(UserTypeId id, string name)
         {
-            Id = new UserTypeId(Guid.NewGuid());
+            Id = id;
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(

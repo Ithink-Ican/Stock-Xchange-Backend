@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StockMarketApp.Features.Instruments.Domain;
-using StockMarketApp.Features.InstrumentTypes.Domain;
-using StockMarketApp.Features.Industries.Domain;
-using StockMarketApp.Features.Issuers.Domain;
+using StockMarket.Features.Instruments.Domain;
+using StockMarket.Features.InstrumentTypes.Domain;
+using StockMarket.Features.Industries.Domain;
+using StockMarket.Features.Issuers.Domain;
 
-namespace StockMarketApp.Features.Instruments.Infrastructure;
+namespace StockMarket.Features.Instruments.Infrastructure;
 
 public class InstrumentConfiguration : IEntityTypeConfiguration<Instrument>
 {

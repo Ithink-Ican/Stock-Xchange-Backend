@@ -1,7 +1,7 @@
-﻿using StockMarketApp.Features.Instruments.Domain;
-using StockMarketApp.Features.Traders.Domain;
+﻿using StockMarket.Features.Instruments.Domain;
+using StockMarket.Features.Traders.Domain;
 
-namespace StockMarketApp.Features.Portfolios.Domain
+namespace StockMarket.Features.Portfolios.Domain
 {
     public class Portfolio
     {
@@ -10,7 +10,7 @@ namespace StockMarketApp.Features.Portfolios.Domain
         public InstrumentId InstrumentId { get; private set; }
         public int Amount { get; private set; }
 
-        public Portfolio(TraderId traderId, InstrumentId instrumentId, int amount)
+        public Portfolio(PortfolioId id, TraderId traderId, InstrumentId instrumentId, int amount)
         {
             if (amount <= 0)
             {
@@ -18,7 +18,7 @@ namespace StockMarketApp.Features.Portfolios.Domain
                     "Количество не может быть отрицательнм",
                     nameof(amount));
             }
-            Id = new PortfolioId(Guid.NewGuid());
+            Id = id;
             TraderId = traderId;
             InstrumentId = instrumentId;
             Amount = amount;

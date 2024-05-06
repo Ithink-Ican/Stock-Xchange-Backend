@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StockMarketApp.Features.Offers.Domain;
-using StockMarketApp.Features.Traders.Domain;
-using StockMarketApp.Features.Instruments.Domain;
-using StockMarketApp.Features.Currencies.Domain;
+using StockMarket.Features.Offers.Domain;
+using StockMarket.Features.Traders.Domain;
+using StockMarket.Features.Instruments.Domain;
+using StockMarket.Features.Currencies.Domain;
 
-namespace StockMarketApp.Features.Offers.Infrastructure;
+namespace StockMarket.Features.Offers.Infrastructure;
 
 public class OfferConfiguration : IEntityTypeConfiguration<Offer>
 {

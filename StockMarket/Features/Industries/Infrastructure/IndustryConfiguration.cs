@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StockMarketApp.Features.Industries.Domain;
+using StockMarket.Features.Industries.Domain;
 
-namespace StockMarketApp.Features.Industries.Infrastructure;
+namespace StockMarket.Features.Industries.Infrastructure;
 
 public class IndustryConfiguration : IEntityTypeConfiguration<Industry>
 {

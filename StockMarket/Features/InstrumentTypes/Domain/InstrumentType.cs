@@ -1,4 +1,4 @@
-﻿namespace StockMarketApp.Features.InstrumentTypes.Domain
+﻿namespace StockMarket.Features.InstrumentTypes.Domain
 {
     public class InstrumentType
     {
@@ -7,7 +7,7 @@
 
         public InstrumentType(InstrumentTypeId id, string name)
         {
-            Id = new InstrumentTypeId(Guid.NewGuid());
+            Id = id;
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(

@@ -1,4 +1,4 @@
-﻿namespace StockMarketApp.Features.Issuers.Domain
+﻿namespace StockMarket.Features.Issuers.Domain
 {
     public class Issuer
     {
@@ -8,7 +8,7 @@
 
         public Issuer(IssuerId id, string name, string description)
         {
-            Id = new IssuerId(Guid.NewGuid());
+            Id = id;
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException(

@@ -1,4 +1,4 @@
-﻿namespace StockMarketApp.Features.UserTypes.Domain
+﻿namespace StockMarket.Features.UserTypes.Domain
 {
     public record UserTypeId(Guid Value);
 }

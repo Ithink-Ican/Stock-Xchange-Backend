@@ -1,4 +1,4 @@
-﻿namespace StockMarketApp.Features.Currencies.Domain;
+﻿namespace StockMarket.Features.Currencies.Domain;
 
 public class Currency
 {
@@ -9,9 +9,16 @@ public class Currency
     public string Name { get; private set; }
     public decimal Rate { get; private set; }
 
-    public Currency(CurrencyId id, IntCode intCode, ChrCode chrCode, int amount, string name, decimal rate)
+    public Currency(
+        CurrencyId id, 
+        IntCode intCode, 
+        ChrCode chrCode, 
+        int amount, string 
+        name, 
+        decimal rate
+        )
     {
-        Id = new CurrencyId(Guid.NewGuid());
+        Id = id;
         if (amount <= 0)
         {
             throw new ArgumentException(

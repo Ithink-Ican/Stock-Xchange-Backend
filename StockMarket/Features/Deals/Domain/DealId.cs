@@ -1,2 +1,2 @@
-﻿namespace StockMarketApp.Features.Deals.Domain;
+﻿namespace StockMarket.Features.Deals.Domain;
 public record DealId(Guid Value);

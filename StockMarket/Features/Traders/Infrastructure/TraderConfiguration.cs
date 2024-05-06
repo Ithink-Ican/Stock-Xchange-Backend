@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StockMarketApp.Features.Traders.Domain;
+using StockMarket.Features.Users.Domain;
+using StockMarket.Features.Traders.Domain;
 
-namespace StockMarketApp.Features.Traders.Infrastructure;
+namespace StockMarket.Features.Traders.Infrastructure;
 
 public class TraderConfiguration : IEntityTypeConfiguration<Trader>
 {
@@ -26,8 +27,12 @@ public class TraderConfiguration : IEntityTypeConfiguration<Trader>
             inn => inn.Value,
             value => INN.Create(value)
             )
+            .HasColumnName("inn");
 
-
-    .HasColumnName("trader_id");
+        builder.Property(i => i.UserId).HasConversion(
+                userId => userId.Value,
+                value => new UserId(value)
+                )
+       .HasColumnName("user_id");
     }
 }

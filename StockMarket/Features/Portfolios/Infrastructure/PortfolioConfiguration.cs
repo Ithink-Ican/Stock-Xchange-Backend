@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StockMarketApp.Features.Portfolios.Domain;
-using StockMarketApp.Features.Traders.Domain;
-using StockMarketApp.Features.Instruments.Domain;
+using StockMarket.Features.Portfolios.Domain;
+using StockMarket.Features.Traders.Domain;
+using StockMarket.Features.Instruments.Domain;
 
-namespace StockMarketApp.Features.Portfolios.Infrastructure;
+namespace StockMarket.Features.Portfolios.Infrastructure;
 
 public class PortfolioConfiguration : IEntityTypeConfiguration<Portfolio>
 {

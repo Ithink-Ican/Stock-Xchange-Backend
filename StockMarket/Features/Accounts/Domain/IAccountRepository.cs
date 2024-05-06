@@ -1,12 +1,11 @@
-﻿using StockMarketApp.Features.Accounts.Domain;
-
-namespace StockMarketApp.Features.Accounts.Domain
+﻿namespace StockMarket.Features.Accounts.Domain
 {
     public interface IAccountRepository
     {
-        void Create(Account account);
-        IQueryable<Account> GetAll();
-        void Update(Account account);
-        void Delete(Account account);
+        Task Create(Account account);
+        Task<List<Account>> GetAll();
+        Task<Account> Get(AccountId id);
+        Task Update(Account account);
+        Task Delete(AccountId accountId);
     }
 }

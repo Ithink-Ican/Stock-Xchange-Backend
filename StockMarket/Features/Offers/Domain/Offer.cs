@@ -1,8 +1,8 @@
-﻿using StockMarketApp.Features.Currencies.Domain;
-using StockMarketApp.Features.Instruments.Domain;
-using StockMarketApp.Features.Traders.Domain;
+﻿using StockMarket.Features.Currencies.Domain;
+using StockMarket.Features.Instruments.Domain;
+using StockMarket.Features.Traders.Domain;
 
-namespace StockMarketApp.Features.Offers.Domain
+namespace StockMarket.Features.Offers.Domain
 {
     public class Offer
     {
@@ -16,7 +16,14 @@ namespace StockMarketApp.Features.Offers.Domain
         public bool IsSatisfied { get; private set; }
         public DateTime PlacementDate { get; private set; }
 
-        public Offer(TraderId traderId, InstrumentId instrumentId, int amount, decimal price, CurrencyId currencyId, bool isSale)
+        public Offer(
+            OfferId id, 
+            TraderId traderId, 
+            InstrumentId instrumentId, 
+            int amount, decimal price, 
+            CurrencyId currencyId,
+            bool isSale
+            )
         {
             if (price <= 0)
             {
@@ -30,7 +37,7 @@ namespace StockMarketApp.Features.Offers.Domain
                     "Количество не может быть отрицательнм",
                     nameof(amount));
             }
-            Id = new OfferId(Guid.NewGuid());
+            Id = id;
             TraderId = traderId;
             InstrumentId = instrumentId;
             Amount = amount;

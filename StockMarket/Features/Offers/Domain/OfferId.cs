@@ -1,3 +1,3 @@
-﻿namespace StockMarketApp.Features.Offers.Domain;
+﻿namespace StockMarket.Features.Offers.Domain;
 
 public record OfferId(Guid Value);

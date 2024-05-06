@@ -6,28 +6,32 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using StockMarketApp.Features.Accounts.Domain;
-using StockMarketApp.Features.Accounts.Infrastructure.Configuration;
-using StockMarketApp.Features.Currencies.Domain;
-using StockMarketApp.Features.Currencies.Infrastructure;
-using StockMarketApp.Features.Deals.Domain;
-using StockMarketApp.Features.Deals.Infrastructure;
-using StockMarketApp.Features.Industries.Domain;
-using StockMarketApp.Features.Industries.Infrastructure;
-using StockMarketApp.Features.Instruments.Domain;
-using StockMarketApp.Features.Instruments.Infrastructure;
-using StockMarketApp.Features.InstrumentTypes.Domain;
-using StockMarketApp.Features.InstrumentTypes.Infrastructure;
-using StockMarketApp.Features.Issuers.Domain;
-using StockMarketApp.Features.Issuers.Infrastructure;
-using StockMarketApp.Features.Offers.Domain;
-using StockMarketApp.Features.Offers.Infrastructure;
-using StockMarketApp.Features.Portfolios.Domain;
-using StockMarketApp.Features.Portfolios.Infrastructure;
-using StockMarketApp.Features.Traders.Domain;
-using StockMarketApp.Features.Traders.Infrastructure;
+using StockMarket.Features.Accounts.Domain;
+using StockMarket.Features.Accounts.Infrastructure.Configuration;
+using StockMarket.Features.Currencies.Domain;
+using StockMarket.Features.Currencies.Infrastructure;
+using StockMarket.Features.Deals.Domain;
+using StockMarket.Features.Deals.Infrastructure;
+using StockMarket.Features.Industries.Domain;
+using StockMarket.Features.Industries.Infrastructure;
+using StockMarket.Features.Instruments.Domain;
+using StockMarket.Features.Instruments.Infrastructure;
+using StockMarket.Features.InstrumentTypes.Domain;
+using StockMarket.Features.InstrumentTypes.Infrastructure;
+using StockMarket.Features.Issuers.Domain;
+using StockMarket.Features.Issuers.Infrastructure;
+using StockMarket.Features.Offers.Domain;
+using StockMarket.Features.Offers.Infrastructure;
+using StockMarket.Features.Portfolios.Domain;
+using StockMarket.Features.Portfolios.Infrastructure;
+using StockMarket.Features.Traders.Domain;
+using StockMarket.Features.Traders.Infrastructure;
+using StockMarket.Features.UserTypes.Domain;
+using StockMarket.Features.UserTypes.Infrastructure;
+using StockMarket.Features.Users.Domain;
+using StockMarket.Features.Users.Infrastructure;
 
-namespace StockMarketApp.Shared.Infrastructure;
+namespace StockMarket.Shared.Infrastructure;
 
 public partial class StockMarketAppDbContext : DbContext
 {
@@ -47,11 +51,13 @@ public partial class StockMarketAppDbContext : DbContext
     public virtual DbSet<Deal> Deals { get; set; } = null!;
     public virtual DbSet<Industry> Industries { get; set; } = null!;
     public virtual DbSet<Instrument> Instruments { get; set; } = null!;
-    public virtual DbSet<InstrumentType> Instrumenttypes { get; set; } = null!;
+    public virtual DbSet<InstrumentType> InstrumentTypes { get; set; } = null!;
     public virtual DbSet<Issuer> Issuers { get; set; } = null!;
     public virtual DbSet<Offer> Offers { get; set; } = null!;
     public virtual DbSet<Portfolio> Portfolios { get; set; } = null!;
     public virtual DbSet<Trader> Traders { get; set; } = null!;
+    public virtual DbSet<User> Users { get; set; } = null!;
+    public virtual DbSet<UserType> UserTypes { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -73,6 +79,8 @@ public partial class StockMarketAppDbContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(OfferConfiguration).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(PortfolioConfiguration).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(TraderConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserConfiguration).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserTypeConfiguration).Assembly);
 
         //modelBuilder.Entity<Appuser>(entity =>
         //{

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StockMarketApp.Features.Currencies.Domain;
+using StockMarket.Features.Currencies.Domain;
 
-namespace StockMarketApp.Features.Currencies.Infrastructure;
+namespace StockMarket.Features.Currencies.Infrastructure;
 
 public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
 {
@@ -20,13 +20,13 @@ public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
             .HasColumnName("id");
         
         builder.Property(c => c.IntCode).HasConversion(
-            intCode => intCode.Value,
+            intCode => intCode.value,
             value => IntCode.Create(value)
             )
             .HasColumnName("int_code");
 
         builder.Property(c => c.ChrCode).HasConversion(
-            chrCode => chrCode.Value,
+            chrCode => chrCode.value,
             value => ChrCode.Create(value)
             )
             .HasColumnName("chr_code");
@@ -40,7 +40,7 @@ public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
         builder.Property(c => c.Rate)
             .HasPrecision(4)
             .HasColumnType("money")
-            .HasColumnName("balance");
+            .HasColumnName("rate");
 
     }
 }

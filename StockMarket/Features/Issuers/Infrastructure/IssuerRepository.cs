@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StockMarketApp.Features.Issuers.Domain;
-using StockMarketApp.Shared.Infrastructure;
-using System.Threading.Tasks;
+using StockMarket.Features.Issuers.Domain;
+using StockMarket.Shared.Infrastructure;
 
-namespace StockMarketApp.Features.Issuers.Infrastructure
+namespace StockMarket.Features.Issuers.Infrastructure
 {
     internal sealed class IssuerRepository : IIssuerRepository
     {

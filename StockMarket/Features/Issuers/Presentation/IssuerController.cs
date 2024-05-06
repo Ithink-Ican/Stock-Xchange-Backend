@@ -1,44 +1,58 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StockMarketApp.Features.Issuers.Application;
-using StockMarketApp.Features.Issuers.Infrastructure;
-using StockMarketApp.Shared.Infrastructure;
-using StockMarketApp.Shared.Data;
+using StockMarket.Features.Industries.Domain;
+using StockMarket.Features.Industries.Application;
+using StockMarket.Shared.Data;
 
-namespace StockMarketApp.Features.Issuers.Presentation
+namespace StockMarket.Features.Industries.Presentation
 {
     [ApiController]
     [Route("[controller]")]
-    public class IssuerController : ControllerBase
+    public class IndustryController : ControllerBase
     {
-        private StockMarketAppDbContext _context = new StockMarketAppDbContext();
+        private IIndustryService _service;
+
+        public IndustryController()
+        {
+            _service = new IndustryService();
+        }
 
         [HttpPost]
-        public IssuerDto PostIssuer(IssuerDto issuerDto)
+        public ActionResult<IndustryDto> PostIndustry(IndustryDto industryDto)
         {
-            var issuerRepository = new IssuerRepository(_context);
-            IssuerService issuerService = new IssuerService(issuerRepository);
-            issuerService.Create(issuerDto);
-            return issuerDto;
+            _service.Create(industryDto);
+            return industryDto;
         }
 
         [HttpGet]
-        public IEnumerable<IssuerDto> GetIssuers()
+        public ActionResult<IEnumerable<IndustryDto>> GetIndustries()
         {
-            var issuerRepository = new IssuerRepository(_context);
-            IssuerService issuerService = new IssuerService(issuerRepository);
-            var dto = new IssuerDto();
-            var issuers = issuerService.GetAll().Result;
-            var dtos = dto.BulkConvert(issuers);
-            return dtos;
+            var dto = new IndustryDto();
+            var industrys = _service.GetAll().Result;
+            var dtos = dto.BulkConvert(industrys);
+            return Ok(dtos);
         }
 
-        public IssuerDto GetIssuer(IssuerDto issuerDto)
+        [HttpGet("{id}")]
+        public ActionResult<IndustryDto> GetIndustry(IndustryId id)
         {
-            var issuerRepository = new IssuerRepository(_context);
-            IssuerService issuerService = new IssuerService(issuerRepository);
-            var issuer = issuerService.Get(issuerDto);
-            var dto = IssuerDto.Create();
+            var industry = _service.Get(id).Result;
+            var dto = IndustryDto.Create(industry.Id, industry.Name);
+            return Ok(dto);
+        }
+
+        [HttpPut]
+        public ActionResult<IndustryDto> PutIndustry(IndustryDto industry)
+        {
+            _service.Update(industry);
+            return Ok(industry);
+        }
+
+        [HttpDelete]
+        public ActionResult<IndustryDto> DeleteIndustry(IndustryId id)
+        {
+            _service.Delete(id);
+            return Ok(id);
         }
     }
 }

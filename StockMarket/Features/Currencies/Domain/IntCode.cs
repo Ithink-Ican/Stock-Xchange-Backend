@@ -1,9 +1,7 @@
-﻿namespace StockMarketApp.Features.Currencies.Domain;
+﻿namespace StockMarket.Features.Currencies.Domain;
 
-public record IntCode
+public record IntCode(int value)
 {
-    private IntCode(int value) => Value = value;
-    public int Value { get; init; }
     private const int maxValue = 99;
     public static IntCode? Create(int value)
     {

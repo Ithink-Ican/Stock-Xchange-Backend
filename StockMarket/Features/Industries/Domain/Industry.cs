@@ -1,4 +1,4 @@
-﻿namespace StockMarketApp.Features.Industries.Domain
+﻿namespace StockMarket.Features.Industries.Domain
 {
     public class Industry
     {
@@ -12,7 +12,7 @@
                     "Наименование индустрии не может быть пустым",
                     nameof(name));
             }
-            Id = new IndustryId(Guid.NewGuid());
+            Id = id;
             Name = name;
         }
         public void ChangeAttributes(string name)

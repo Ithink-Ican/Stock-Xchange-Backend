@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StockMarketApp.Features.Accounts.Domain;
-using StockMarketApp.Features.Traders.Domain;
-using StockMarketApp.Features.Currencies.Domain;
+using StockMarket.Features.Accounts.Domain;
+using StockMarket.Features.Traders.Domain;
+using StockMarket.Features.Currencies.Domain;
 
-namespace StockMarketApp.Features.Accounts.Infrastructure.Configuration;
+namespace StockMarket.Features.Accounts.Infrastructure.Configuration;
 
 public class AccountConfiguration : IEntityTypeConfiguration<Account>
 {

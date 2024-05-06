@@ -1,9 +1,7 @@
-﻿namespace StockMarketApp.Features.Currencies.Domain;
+﻿namespace StockMarket.Features.Currencies.Domain;
 
-public record ChrCode
+public record ChrCode(string value)
 {
-    private ChrCode(string value) => Value = value;
-    public string Value { get; init; }
     public static ChrCode? Create(string value)
     {
         if (string.IsNullOrEmpty(value))

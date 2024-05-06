@@ -1,3 +1,3 @@
-﻿namespace StockMarketApp.Features.Instruments.Domain;
+﻿namespace StockMarket.Features.Instruments.Domain;
 
 public record InstrumentId(Guid Value);

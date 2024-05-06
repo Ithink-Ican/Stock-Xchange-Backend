@@ -1,4 +1,4 @@
-﻿namespace StockMarketApp.Common.Infrastructure
+﻿namespace StockMarket.Common.Infrastructure
 {
     public interface IUnitOfWork
     {

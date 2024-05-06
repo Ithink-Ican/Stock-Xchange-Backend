@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StockMarketApp.Features.InstrumentTypes.Domain;
+using StockMarket.Features.InstrumentTypes.Domain;
 
-namespace StockMarketApp.Features.InstrumentTypes.Infrastructure;
+namespace StockMarket.Features.InstrumentTypes.Infrastructure;
 
 internal class InstrumentTypeConfiguration : IEntityTypeConfiguration<InstrumentType>
 {

@@ -1,18 +1,21 @@
-﻿using StockMarketApp.Features.Currencies.Domain;
-using StockMarketApp.Features.Traders.Domain;
+﻿using StockMarket.Features.Currencies.Domain;
+using StockMarket.Features.Traders.Domain;
 
-namespace StockMarketApp.Features.Accounts.Domain
+namespace StockMarket.Features.Accounts.Domain
 {
     public class Account
     {
+        public Account()
+        {
+        }
         public AccountId Id { get; private set; }
         public TraderId TraderId { get; private set; }
         public decimal Balance { get; private set; }
         public CurrencyId CurrencyId { get; private set; }
 
-        public Account(TraderId traderId, decimal balance, CurrencyId currencyId)
+        public Account(AccountId id, TraderId traderId, decimal balance, CurrencyId currencyId)
         {
-            Id = new AccountId(Guid.NewGuid());
+            Id = id;
             if (balance < 0)
             {
                 throw new ArgumentException(
@@ -33,7 +36,7 @@ namespace StockMarketApp.Features.Accounts.Domain
             Balance = balance;
         }
 
-        public void TopUpBalance(decimal amount)
+        public void IncreaseBalance(decimal amount)
         {
             if (Balance + amount < 0)
             {
@@ -44,7 +47,7 @@ namespace StockMarketApp.Features.Accounts.Domain
             Balance += amount;
         }
 
-        public void ReduceBalance(decimal amount)
+        public void DecreaseBalance(decimal amount)
         {
             if (Balance - amount < 0)
             {

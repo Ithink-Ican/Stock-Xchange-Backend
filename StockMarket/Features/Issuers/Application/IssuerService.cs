@@ -1,22 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StockMarketApp.Features.Issuers.Domain;
-using StockMarketApp.Features.Issuers.Infrastructure;
+﻿using StockMarket.Shared.Data;
+using StockMarket.Shared.Infrastructure;
+using StockMarket.Features.Issuers.Domain;
+using StockMarket.Features.Issuers.Infrastructure;
 
-using StockMarketApp.Shared.Data;
+namespace StockMarket.Features.Issuers.Application;
 
-namespace StockMarketApp.Features.Issuers.Application;
+public interface IIssuerService
+{
+    void Create(IssuerDto issuerDto);
+    Task<List<Issuer>> GetAll();
+    Task<Issuer> Get(IssuerId id);
+    void Update(IssuerDto issuerDto);
+    void Delete(IssuerId id);
+}
 
-public class IssuerService
+public class IssuerService : IIssuerService
 {
     private readonly IIssuerRepository _issuerRepository;
-
-    public IssuerService(IIssuerRepository issuerRepository)
+    private readonly StockMarketAppDbContext _context;
+    public IssuerService()
     {
-        _issuerRepository = issuerRepository;
+        _context = new StockMarketAppDbContext();
+        _issuerRepository = new IssuerRepository(_context);
     }
     
     public void Create(IssuerDto issuerDto)
@@ -35,9 +40,9 @@ public class IssuerService
         return issuers;
     }
 
-    public Task<Issuer> Get(IssuerDto issuerDto)
+    public Task<Issuer> Get(IssuerId id)
     {
-        return _issuerRepository.Get(issuerDto.Id);
+        return _issuerRepository.Get(id);
     }
 
     public void Update(IssuerDto issuerDto)
@@ -48,5 +53,10 @@ public class IssuerService
             issuerDto.Description
             );
         _issuerRepository.Update(issuer);
+    }
+
+   public void Delete(IssuerId id)
+    {
+        _issuerRepository.Delete(id);
     }
 }

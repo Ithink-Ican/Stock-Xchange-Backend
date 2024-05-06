@@ -1,4 +1,4 @@
-﻿namespace StockMarketApp.Features.Accounts.Domain
+﻿namespace StockMarket.Features.Accounts.Domain
 {
     public record AccountId(Guid Value);
 }
