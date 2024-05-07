@@ -6,10 +6,10 @@ namespace StockMarket.Shared.Data;
 public class UserDto
 {
     public UserId Id { get; set; }
-    public string Login { get; set; }
-    public string Password { get; set; }
-    public string Email { get; set; }
     public string Name { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
+    public string Salt { get; set; }
     public DateTime SignUpDate { get; set; }
     public UserTypeId UserTypeId { get; set; }
 
@@ -19,18 +19,18 @@ public class UserDto
 
     public static UserDto Create(
         UserId id,
-        string login,
-        string password,
-        string email,
         string name,
+        string email,
+        string password,
+        string salt,
         DateTime signUpDate,
         UserTypeId userTypeId
         )
     {
         var dto = new UserDto();
         dto.Id = id;
-        dto.Login = login;
         dto.Password = password;
+        dto.Salt = salt;
         dto.Email = email;
         dto.Name = name;
         dto.SignUpDate = signUpDate;
@@ -46,8 +46,8 @@ public class UserDto
         {
             var dto = UserDto.Create(
                 user.Id,
-                user.Login,
                 user.Password,
+                user.Salt,
                 user.Email,
                 user.Name,
                 user.SignUpDate,

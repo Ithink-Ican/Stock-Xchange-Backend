@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using StockMarket.Features.Currencies.Domain;
 using StockMarket.Features.Currencies.Application;
 using StockMarket.Shared.Data;

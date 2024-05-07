@@ -20,9 +20,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             )
             .HasColumnName("id");
 
-        builder.Property(p => p.Login)
-            .HasColumnName("login");
-
         builder.Property(p => p.Password)
             .HasColumnName("password");
 

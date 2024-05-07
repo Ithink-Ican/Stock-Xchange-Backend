@@ -24,9 +24,10 @@ namespace StockMarket.Features.Users.Infrastructure
             return users;
         }
 
-        public async Task<User> Get(UserId userId)
+        public async Task<User> Get(string email)
         {
-            var user = await _stockMarketDbContext.Users.FindAsync(userId);
+            var user = await _stockMarketDbContext.Users
+                .FirstOrDefaultAsync(u => u.Email == email);
             return user;
         }
 

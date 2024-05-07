@@ -32,7 +32,9 @@ public class DealConfiguration : IEntityTypeConfiguration<Deal>
             )
             .HasColumnName("buy_offer_id");
 
-        builder.Property(d => d.DealDate).HasColumnName("deal_date");
+        builder.Property(d => d.DealDate)
+            .HasColumnType("timestamp")
+            .HasColumnName("deal_date");
 
         builder.HasOne<Offer>()
                 .WithMany()

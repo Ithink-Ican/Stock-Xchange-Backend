@@ -18,10 +18,12 @@ namespace StockMarket.Features.Users.Presentation
         }
 
         [HttpPost]
-        public ActionResult<UserDto> PostUser(UserDto userDto)
+        public ActionResult<NewUserDto> PostUser(
+            NewUserDto dto
+            )
         {
-            _service.Create(userDto);
-            return CreatedAtAction("PostUser", new { id = userDto.Id }, userDto);
+            _service.Create(dto);
+            return CreatedAtAction("PostUser", new { email = dto.Email }, dto);
         }
 
         [HttpGet]
@@ -34,20 +36,19 @@ namespace StockMarket.Features.Users.Presentation
         }
 
         [HttpGet("{id}")]
-        public ActionResult<UserDto> GetUser(UserId id)
+        public ActionResult<UserDto> GetUser([FromQuery] string email)
         {
-            var user = _service.Get(id).Result;
+            var user = _service.Get(email).Result;
             var dto = UserDto.Create(
                 user.Id,
-                user.Login,
                 user.Password,
+                user.Salt,
                 user.Email,
                 user.Name,
                 user.SignUpDate,
                 user.UserTypeId
                 );
-            Console.WriteLine("controller" + user.Name + user.Password);
-            return Ok(dto);
+            return dto;
         }
 
         [HttpPut]
@@ -64,11 +65,11 @@ namespace StockMarket.Features.Users.Presentation
             return Ok(id);
         }
 
-        [HttpGet("{id}, {password}")]
-        public ActionResult<bool> Login(UserId id, string password)
+        [HttpGet("{email}&{password}")]
+        public ActionResult<string> Login([FromQuery] string email, [FromQuery] string password)
         {
-            var result = _service.Login(id, password);
-            if (result)
+            var result = _service.Login(email, password);
+            if (result != "")
             {
                 return Ok(result);
             }

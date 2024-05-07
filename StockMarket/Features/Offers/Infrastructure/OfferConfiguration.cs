@@ -54,7 +54,9 @@ public class OfferConfiguration : IEntityTypeConfiguration<Offer>
         builder.Property(o => o.IsSale)
             .HasColumnName("is_satisfied");
 
-        builder.Property(e => e.PlacementDate).HasColumnName("placement_date");
+        builder.Property(e => e.PlacementDate)
+            .HasColumnType("timestamp")
+            .HasColumnName("placement_date");
 
         builder.HasOne<Trader>()
                 .WithMany()
