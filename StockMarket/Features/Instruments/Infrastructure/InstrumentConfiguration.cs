@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using StockMarket.Features.Instruments.Domain;
 using StockMarket.Features.InstrumentTypes.Domain;
 using StockMarket.Features.Industries.Domain;
-using StockMarket.Features.Issuers.Domain;
+using StockMarket.Features.Currencies.Domain;
 
 namespace StockMarket.Features.Instruments.Infrastructure;
 
@@ -40,11 +40,22 @@ public class InstrumentConfiguration : IEntityTypeConfiguration<Instrument>
             )
             .HasColumnName("industry_id");
 
-        builder.Property(i => i.IssuerId).HasConversion(
-            issuerId => issuerId.Value,
-            value => new IssuerId(value)
+        builder.Property(i => i.CurrencyId).HasConversion(
+            currencyId => currencyId.Value,
+            value => new CurrencyId(value)
             )
-            .HasColumnName("issuer_id");
+            .HasColumnName("currency_id");
+
+        builder.Property(i => i.IssuerName)
+            .HasColumnName("issuer_name");
+
+        builder.Property(i => i.Description)
+            .HasColumnName("description");
+
+        builder.Property(a => a.MarketPrice)
+            .HasColumnType("decimal")
+            .HasPrecision(12, 2)
+            .HasColumnName("market_price");
 
         builder.Property(i => i.IsActive).HasColumnName("is_active");
 
@@ -60,10 +71,10 @@ public class InstrumentConfiguration : IEntityTypeConfiguration<Instrument>
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("stock_industry_id_fkey");
 
-        builder.HasOne<Issuer>()
+        builder.HasOne<Currency>()
                 .WithMany()
-                .HasForeignKey(iS => iS.IssuerId)
+                .HasForeignKey(iN => iN.CurrencyId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("issuer_id_fkey");
+                .HasConstraintName("currency_id_fkey");
     }
 }

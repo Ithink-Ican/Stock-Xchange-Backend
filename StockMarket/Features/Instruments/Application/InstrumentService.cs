@@ -2,6 +2,8 @@
 using StockMarket.Shared.Infrastructure;
 using StockMarket.Features.Instruments.Domain;
 using StockMarket.Features.Instruments.Infrastructure;
+using StockMarket.Features.Traders.Domain;
+using StockMarket.Features.InstrumentTypes.Domain;
 
 namespace StockMarket.Features.Instruments.Application;
 
@@ -9,7 +11,9 @@ public interface IInstrumentService
 {
     void Create(InstrumentDto instrumentDto);
     Task<List<Instrument>> GetAll();
-    Task<Instrument> Get(InstrumentId id);
+    InstrumentDto Get(InstrumentId id);
+    InstrumentDto GetByCode(string code);
+    List<InstrumentDto> GetByType(InstrumentTypeId typeId);
     void Update(InstrumentDto instrumentDto);
     void Delete(InstrumentId id);
 }
@@ -31,9 +35,11 @@ public class InstrumentService : IInstrumentService
             instrumentDto.Code,
             instrumentDto.InstrumentTypeId,
             instrumentDto.IndustryId,
-            instrumentDto.IssuerId,
-            instrumentDto.IsActive,
-            instrumentDto.SubInstruments
+            instrumentDto.IssuerName,
+            instrumentDto.Description,
+            instrumentDto.MarketPrice,
+            instrumentDto.CurrencyId,
+            instrumentDto.IsActive
             );
         _instrumentRepository.Create(instrument);
     }
@@ -44,9 +50,47 @@ public class InstrumentService : IInstrumentService
         return instruments;
     }
 
-    public Task<Instrument> Get(InstrumentId id)
+    public InstrumentDto Get(InstrumentId id)
     {
-        return _instrumentRepository.Get(id);
+        var instrument = _instrumentRepository.Get(id).Result;
+        var instrumentDto = InstrumentDto.Create(
+            instrument.Id,
+            instrument.Code,
+            instrument.InstrumentTypeId,
+            instrument.IndustryId,
+            instrument.IssuerName,
+            instrument.Description,
+            instrument.MarketPrice,
+            instrument.CurrencyId,
+            instrument.IsActive
+            );
+        return instrumentDto;
+    }
+
+    public InstrumentDto GetByCode(string code)
+    {
+        var insCode = Code.Create(code);
+        var instrument = _instrumentRepository.GetByCode(insCode).Result;
+        var dto = InstrumentDto.Create(
+            instrument.Id,
+            instrument.Code,
+            instrument.InstrumentTypeId,
+            instrument.IndustryId,
+            instrument.IssuerName,
+            instrument.Description,
+            instrument.MarketPrice,
+            instrument.CurrencyId,
+            instrument.IsActive
+            );
+        return dto;
+    }
+
+    public List<InstrumentDto> GetByType(InstrumentTypeId typeId)
+    {
+        var instruments = _instrumentRepository.GetByType(typeId).Result;
+        var dto = new InstrumentDto();
+        var dtos = dto.BulkConvert(instruments);
+        return dtos;
     }
 
     public void Update(InstrumentDto instrumentDto)
@@ -56,9 +100,11 @@ public class InstrumentService : IInstrumentService
             instrumentDto.Code,
             instrumentDto.InstrumentTypeId,
             instrumentDto.IndustryId,
-            instrumentDto.IssuerId,
-            instrumentDto.IsActive,
-            instrumentDto.SubInstruments
+            instrumentDto.IssuerName,
+            instrumentDto.Description,
+            instrumentDto.MarketPrice,
+            instrumentDto.CurrencyId,
+            instrumentDto.IsActive
             );
         _instrumentRepository.Update(instrument);
     }

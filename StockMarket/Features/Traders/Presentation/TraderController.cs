@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StockMarket.Features.Traders.Domain;
 using StockMarket.Features.Traders.Application;
 using StockMarket.Shared.Data;
+using StockMarket.Features.Users.Domain;
 
 namespace StockMarket.Features.Traders.Presentation
 {
@@ -46,6 +47,23 @@ namespace StockMarket.Features.Traders.Presentation
             return Ok(dto);
         }
 
+        [HttpGet("/trader-by-user")]
+        public ActionResult<TraderDto> GetByUserId([FromQuery] UserId id)
+        {
+            var trader = _service.GetByUserId(id).Result;
+            if (trader == null)
+            {
+                return NotFound();
+            }
+            var dto = TraderDto.Create(
+                trader.Id,
+                trader.Name,
+                trader.INN,
+                trader.UserId
+                );
+            return Ok(dto);
+        }
+
         [HttpPut]
         public ActionResult<TraderDto> PutTrader(TraderDto trader)
         {
@@ -54,7 +72,7 @@ namespace StockMarket.Features.Traders.Presentation
         }
 
         [HttpDelete]
-        public ActionResult<TraderDto> DeleteTrader(TraderId id)
+        public ActionResult<TraderDto> DeleteTrader([FromQuery] TraderId id)
         {
             _service.Delete(id);
             return Ok(id);

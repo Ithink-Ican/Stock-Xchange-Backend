@@ -47,7 +47,7 @@ public class InstrumentTypeService : IInstrumentTypeService
     public void Update(InstrumentTypeDto instrumentTypeDto)
     {
         var instrumentType = new InstrumentType(
-            new InstrumentTypeId(Guid.NewGuid()),
+            instrumentTypeDto.Id,
             instrumentTypeDto.Name
             );
         _instrumentTypeRepository.Update(instrumentType);

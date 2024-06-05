@@ -3,54 +3,42 @@ using StockMarket.Features.UserTypes.Domain;
 
 namespace StockMarket.Shared.Data;
 
-public class UserDto
+public class LoggedUserDto
 {
     public UserId Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
-    public string Password { get; set; }
-    public string Salt { get; set; }
-    public DateTime SignUpDate { get; set; }
     public UserTypeId UserTypeId { get; set; }
 
-    public UserDto()
+    public LoggedUserDto()
     {
     }
 
-    public static UserDto Create(
+    public static LoggedUserDto Create(
         UserId id,
         string name,
         string email,
-        string password,
-        string salt,
-        DateTime signUpDate,
         UserTypeId userTypeId
         )
     {
-        var dto = new UserDto();
+        var dto = new LoggedUserDto();
         dto.Id = id;
-        dto.Name = name;
         dto.Email = email;
-        dto.Password = password;
-        dto.Salt = salt;
-        dto.SignUpDate = signUpDate;
+        dto.Name = name;
         dto.UserTypeId = userTypeId;
 
         return dto;
     }
 
-    public List<UserDto> BulkConvert(IEnumerable<User> users)
+    public List<LoggedUserDto> BulkConvert(IEnumerable<User> users)
     {
-        var list = new List<UserDto>();
+        var list = new List<LoggedUserDto>();
         foreach (var user in users)
         {
-            var dto = UserDto.Create(
+            var dto = LoggedUserDto.Create(
                 user.Id,
-                user.Name,
                 user.Email,
-                user.Password,
-                user.Salt,
-                user.SignUpDate,
+                user.Name,
                 user.UserTypeId
             );
             list.Add(dto);

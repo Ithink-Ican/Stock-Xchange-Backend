@@ -22,6 +22,14 @@ builder.Services.AddAuthentication(opt => {
             ValidAudience = "https://localhost:3000",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret key nobody gonna see :)"))
         };
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                context.Token = context.Request.Cookies["jwt_token"];
+                return Task.CompletedTask;
+            }
+        };
     });
 
 builder.Services.AddAuthorization();

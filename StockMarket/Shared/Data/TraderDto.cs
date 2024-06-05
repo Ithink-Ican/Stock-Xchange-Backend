@@ -7,7 +7,7 @@ public class TraderDto
 {
     public TraderId Id { get; set; }
     public string Name { get; set; }
-    public INN INN { get; set; }
+    public string INN { get; set; }
     public UserId UserId { get; set; }
 
     public TraderDto()
@@ -24,7 +24,7 @@ public class TraderDto
         var dto = new TraderDto();
         dto.Id = id;
         dto.Name = name;
-        dto.INN = inn;
+        dto.INN = inn.Value;
         dto.UserId = userId;
 
         return dto;

@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using StockMarket.Features.Portfolios.Domain;
 using StockMarket.Features.Portfolios.Application;
 using StockMarket.Shared.Data;
+using StockMarket.Features.Traders.Domain;
+using StockMarket.Features.Accounts.Domain;
+using StockMarket.Features.Instruments.Domain;
 
 namespace StockMarket.Features.Portfolios.Presentation
 {
@@ -34,7 +37,7 @@ namespace StockMarket.Features.Portfolios.Presentation
         }
 
         [HttpGet("{id}")]
-        public ActionResult<PortfolioDto> GetPortfolio(PortfolioId id)
+        public ActionResult<PortfolioDto> GetPortfolio([FromQuery] PortfolioId id)
         {
             var portfolio = _service.Get(id).Result;
             var dto = PortfolioDto.Create(
@@ -46,11 +49,47 @@ namespace StockMarket.Features.Portfolios.Presentation
             return Ok(dto);
         }
 
+
+        [HttpGet("/by-trader")]
+        public ActionResult<IEnumerable<PortfolioDto>> GetByTrader(TraderId id)
+        {
+            var portfolios = _service.GetByTrader(id);
+            return Ok(portfolios);
+        }
+
+        [HttpGet("/by-trader-instrument")]
+        public ActionResult<PortfolioDto> GetByTraderInstrument([FromQuery]Guid id, [FromQuery]Guid instrumentId)
+        {
+            var portfolio = _service.GetByTraderInstrument(id, instrumentId);
+            return Ok(portfolio);
+        }
+
+        [HttpGet("/trader-portfolio")]
+        public ActionResult<IEnumerable<PortfolioDto>> GetTraderPortfolio([FromQuery] TraderId id)
+        {
+            var portfolios = _service.GetTraderPortfolio(id);
+            return Ok(portfolios);
+        }
+
         [HttpPut]
         public ActionResult<PortfolioDto> PutPortfolio(PortfolioDto portfolio)
         {
             _service.Update(portfolio);
             return Ok(portfolio);
+        }
+
+        [HttpPost("/portfolio/buy")]
+        public ActionResult Buy(Portfolio portfolio)
+        {
+            _service.Buy(portfolio);
+            return Ok();
+        }
+
+        [HttpPut("/portfolio/sell")]
+        public ActionResult Sell([FromQuery]PortfolioId id, [FromQuery]int amount)
+        {
+            _service.Sell(id, amount);
+            return Ok();
         }
 
         [HttpDelete]

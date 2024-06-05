@@ -49,7 +49,7 @@ namespace StockMarket.Features.Industries.Presentation
         }
 
         [HttpDelete]
-        public ActionResult<IndustryDto> DeleteIndustry(IndustryId id)
+        public ActionResult<IndustryDto> DeleteIndustry([FromQuery] IndustryId id)
         {
             _service.Delete(id);
             return Ok(id);

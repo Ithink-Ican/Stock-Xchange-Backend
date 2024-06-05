@@ -49,7 +49,7 @@ namespace StockMarket.Features.Issuers.Presentation
         }
 
         [HttpDelete]
-        public ActionResult<IssuerDto> DeleteIssuer(IssuerId id)
+        public ActionResult<IssuerDto> DeleteIssuer([FromQuery] IssuerId id)
         {
             _service.Delete(id);
             return Ok(id);

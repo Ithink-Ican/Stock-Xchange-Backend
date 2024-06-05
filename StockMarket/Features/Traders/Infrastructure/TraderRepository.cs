@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StockMarket.Features.Traders.Domain;
+using StockMarket.Features.Users.Domain;
 using StockMarket.Shared.Infrastructure;
 
 namespace StockMarket.Features.Traders.Infrastructure
@@ -27,6 +28,14 @@ namespace StockMarket.Features.Traders.Infrastructure
         public async Task<Trader> Get(TraderId traderId)
         {
             var trader = await _stockMarketDbContext.Traders.FindAsync(traderId);
+            return trader;
+        }
+
+        public async Task<Trader> GetByUserId(UserId id)
+        {
+            var trader = await _stockMarketDbContext.Traders.FirstOrDefaultAsync(
+                t => t.UserId == id
+                );
             return trader;
         }
 

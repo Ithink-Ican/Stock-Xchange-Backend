@@ -35,7 +35,7 @@ namespace StockMarket.Features.Users.Presentation
             return Ok(dtos);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{email}")]
         public ActionResult<UserDto> GetUser([FromQuery] string email)
         {
             var user = _service.Get(email).Result;
@@ -65,15 +65,29 @@ namespace StockMarket.Features.Users.Presentation
             return Ok(id);
         }
 
-        [HttpGet("{email}&{password}")]
-        public ActionResult<string> Login([FromQuery] string email, [FromQuery] string password)
+        [HttpGet("/login")]
+        public ActionResult Login([FromQuery] string email, [FromQuery] string password)
         {
             var result = _service.Login(email, password);
             if (result != "")
             {
-                return Ok(result);
+                Response.Cookies.Append("Access-Token", result, new CookieOptions() { HttpOnly = false, SameSite = SameSiteMode.Strict });
+                return Ok();
             }
-            else { return BadRequest(result); }
+            else { return BadRequest(); }
+        }
+
+        [HttpGet("/get-logged-user")]
+        public ActionResult<LoggedUserDto> GetLoggedUser([FromQuery] string email)
+        {
+            var user = _service.Get(email).Result;
+            var dto = LoggedUserDto.Create(
+                user.Id,
+                user.Name,
+                user.Email,
+                user.UserTypeId
+                );
+            return dto;
         }
     }
 }

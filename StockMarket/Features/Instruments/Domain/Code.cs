@@ -2,6 +2,7 @@
 {
     public record Code
     {
+        public Code() { }
         private Code(string value) => Value = value;
         public string Value { get; init; }
 

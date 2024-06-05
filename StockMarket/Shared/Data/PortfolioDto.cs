@@ -10,7 +10,7 @@ public class PortfolioDto
     public TraderId TraderId { get; set; }
     public InstrumentId InstrumentId { get; set; }
     public int Amount { get; set; }
-
+    public InstrumentDto? Instrument { get; set; }
     public PortfolioDto()
     {
     }
@@ -19,7 +19,8 @@ public class PortfolioDto
         PortfolioId id,
         TraderId traderId,
         InstrumentId instrumentId,
-        int amount
+        int amount,
+        InstrumentDto? instrument=null
         )
     {
         var dto = new PortfolioDto();
@@ -27,6 +28,7 @@ public class PortfolioDto
         dto.TraderId = traderId;
         dto.InstrumentId = instrumentId;
         dto.Amount = amount;
+        dto.Instrument = instrument;
 
         return dto;
     }

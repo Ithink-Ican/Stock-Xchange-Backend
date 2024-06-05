@@ -30,6 +30,7 @@ using StockMarket.Features.UserTypes.Domain;
 using StockMarket.Features.UserTypes.Infrastructure;
 using StockMarket.Features.Users.Domain;
 using StockMarket.Features.Users.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace StockMarket.Shared.Infrastructure;
 
@@ -67,6 +68,12 @@ public partial class StockMarketAppDbContext : DbContext
             optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=StockExchange; User Id = postgres; Password = WRTh379Chmpns!;");
         }
     }
+    /* protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder
+            .Properties<decimal>()
+            .HavePrecision(12, 2);
+    } */
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AccountConfiguration).Assembly);

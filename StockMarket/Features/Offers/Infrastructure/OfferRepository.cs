@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StockMarket.Features.Offers.Domain;
+using StockMarket.Features.Traders.Domain;
 using StockMarket.Shared.Infrastructure;
 
 namespace StockMarket.Features.Offers.Infrastructure
@@ -41,6 +42,42 @@ namespace StockMarket.Features.Offers.Infrastructure
         {
             _stockMarketDbContext.Entry(offer).State = EntityState.Modified;
             await _stockMarketDbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<Offer>> GetOfferByTraderId(TraderId id)
+        {
+            var offers = await _stockMarketDbContext.Offers.Where(
+                o => o.TraderId == id
+                ).ToListAsync();
+            return offers;
+        }
+
+        public async Task<List<Offer>> GetLastFiveSatisfiedByTraderId(TraderId id)
+        {
+            var offers = await _stockMarketDbContext.Offers
+                .Where(
+                    o => o.TraderId == id && o.IsSatisfied == true
+                )
+                .Take(5)
+                .OrderByDescending(
+                    o => o.PlacementDate
+                )
+                .ToListAsync();
+            return offers;
+        }
+
+        public async Task<List<Offer>> GetLastFiveUnsatisfiedByTraderId(TraderId id)
+        {
+            var offers = await _stockMarketDbContext.Offers
+                .Where(
+                    o => o.TraderId == id && o.IsSatisfied == false
+                )
+                .Take(5)
+                .OrderByDescending(
+                    o => o.PlacementDate
+                )
+                .ToListAsync();
+            return offers;
         }
     }
 }

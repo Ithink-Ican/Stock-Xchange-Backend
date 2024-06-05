@@ -28,12 +28,6 @@ public class OfferConfiguration : IEntityTypeConfiguration<Offer>
             )
             .HasColumnName("trader_id");
 
-        builder.Property(o => o.CurrencyId).HasConversion(
-            currencyId => currencyId.Value,
-            value => new CurrencyId(value)
-            )
-            .HasColumnName("currency_id");
-
         builder.Property(o => o.InstrumentId).HasConversion(
             instrumentId => instrumentId.Value,
             value => new InstrumentId(value)
@@ -51,7 +45,7 @@ public class OfferConfiguration : IEntityTypeConfiguration<Offer>
         builder.Property(o => o.IsSale)
             .HasColumnName("is_sale");
 
-        builder.Property(o => o.IsSale)
+        builder.Property(o => o.IsSatisfied)
             .HasColumnName("is_satisfied");
 
         builder.Property(e => e.PlacementDate)
@@ -69,12 +63,6 @@ public class OfferConfiguration : IEntityTypeConfiguration<Offer>
                 .HasForeignKey(i => i.InstrumentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("offer_instrument_id_fkey");
-
-        builder.HasOne<Currency>()
-                .WithMany()
-                .HasForeignKey(c => c.CurrencyId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("offer_currency_id_fkey");
     }
 }
 

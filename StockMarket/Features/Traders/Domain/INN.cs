@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +9,18 @@ namespace StockMarket.Features.Traders.Domain
 {
     public class INN
     {
-        private INN(int value) => Value = value;
-        public int Value { get; private set; }
+        private INN(string value) => Value = value;
+        public string Value { get; private set; }
 
-        public static INN? Create(int value)
+        public static INN? Create(string value)
         {
-            String _value = value.ToString();
-            if (value == 0)
+            if (value.IsNullOrEmpty())
             {
                 throw new ArgumentException(
                     "ИНН не может быть пустым",
                     nameof(value));
             }
-            if (_value.Length > 12 || _value.Length < 10)
+            if (value.Length > 12 || value.Length < 10)
             {
                 throw new ArgumentException(
                     "ИНН должен быть от 10 до 12 символов длиной",

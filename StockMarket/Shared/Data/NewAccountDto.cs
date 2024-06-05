@@ -4,32 +4,29 @@ using StockMarket.Features.Currencies.Domain;
 
 namespace StockMarket.Shared.Data;
 
-public class AccountDto
+public class NewAccountDto
 {
     public AccountId Id { get; set; }
     public TraderId TraderId { get; set; }
     public decimal Balance { get; set; }
     public CurrencyId CurrencyId { get; set; }
-    public CurrencyDto? Currency { get; set; }
 
-    public AccountDto()
+    public NewAccountDto()
     {
     }
 
-    public static AccountDto Create(
+    public static NewAccountDto Create(
         AccountId id,
         TraderId traderId,
         decimal balance,
-        CurrencyId currencyId,
-        CurrencyDto? currency=null
+        CurrencyId currencyId
         )
     {
-        var dto = new AccountDto();
+        var dto = new NewAccountDto();
         dto.Id = id;
         dto.TraderId = traderId;
         dto.Balance = balance;
         dto.CurrencyId = currencyId;
-        dto.Currency = currency;
         return dto;
     }
 

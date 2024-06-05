@@ -52,7 +52,7 @@ namespace StockMarket.Features.InstrumentTypes.Presentation
         }
 
         [HttpDelete]
-        public ActionResult<InstrumentTypeDto> DeleteInstrumentType(InstrumentTypeId id)
+        public ActionResult DeleteInstrumentType([FromQuery] InstrumentTypeId id)
         {
             _service.Delete(id);
             return Ok(id);

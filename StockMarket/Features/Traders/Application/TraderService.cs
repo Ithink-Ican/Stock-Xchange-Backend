@@ -2,6 +2,7 @@
 using StockMarket.Shared.Infrastructure;
 using StockMarket.Features.Traders.Domain;
 using StockMarket.Features.Traders.Infrastructure;
+using StockMarket.Features.Users.Domain;
 
 namespace StockMarket.Features.Traders.Application;
 
@@ -10,6 +11,7 @@ public interface ITraderService
     void Create(TraderDto traderDto);
     Task<List<Trader>> GetAll();
     Task<Trader> Get(TraderId id);
+    Task<Trader> GetByUserId(UserId id);
     void Update(TraderDto traderDto);
     void Delete(TraderId id);
 }
@@ -29,7 +31,7 @@ public class TraderService : ITraderService
         var trader = new Trader(
             new TraderId(Guid.NewGuid()),
             traderDto.Name,
-            traderDto.INN,
+            INN.Create(traderDto.INN),
             traderDto.UserId
             );
         _traderRepository.Create(trader);
@@ -46,12 +48,16 @@ public class TraderService : ITraderService
         return _traderRepository.Get(id);
     }
 
+    public Task<Trader> GetByUserId(UserId id)
+    {
+        return _traderRepository.GetByUserId(id);
+    }
     public void Update(TraderDto traderDto)
     {
         var trader = new Trader(
             traderDto.Id,
             traderDto.Name,
-            traderDto.INN,
+            INN.Create(traderDto.INN),
             traderDto.UserId
             );
         _traderRepository.Update(trader);

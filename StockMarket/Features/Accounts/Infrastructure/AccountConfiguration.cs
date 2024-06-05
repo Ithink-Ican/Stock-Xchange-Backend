@@ -34,8 +34,8 @@ public class AccountConfiguration : IEntityTypeConfiguration<Account>
             .HasColumnName("currency_id");
 
         builder.Property(a => a.Balance)
-            .HasPrecision(4)
-            .HasColumnType("money")
+            .HasColumnType("decimal")
+            .HasPrecision(12, 2)
             .HasColumnName("balance");
 
         builder.HasOne<Currency>()

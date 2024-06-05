@@ -35,7 +35,7 @@ public class CurrencyController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<CurrencyDto> GetById(CurrencyId id)
+    public ActionResult<CurrencyDto> GetById([FromQuery] CurrencyId id)
     {
         var currency = _service.Get(id).Result;
         var dto = CurrencyDto.Create(
@@ -57,7 +57,7 @@ public class CurrencyController : ControllerBase
     }
 
     [HttpDelete]
-    public ActionResult<CurrencyDto> Delete(CurrencyId id)
+    public ActionResult<CurrencyDto> Delete([FromQuery] CurrencyId id)
     {
         _service.Delete(id);
         return Ok(id);

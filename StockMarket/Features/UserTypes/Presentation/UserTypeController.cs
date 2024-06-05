@@ -52,7 +52,7 @@ public class UserTypeController : ControllerBase
     }
 
     [HttpDelete]
-    public ActionResult<UserTypeDto> Delete(UserTypeId id)
+    public ActionResult<UserTypeDto> Delete([FromQuery] UserTypeId id)
     {
         _service.Delete(id);
         return Ok(id);

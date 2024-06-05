@@ -1,46 +1,32 @@
-﻿using StockMarket.Features.Accounts.Domain;
-using StockMarket.Features.Traders.Domain;
-using StockMarket.Features.Currencies.Domain;
+﻿using StockMarket.Features.Issuers.Domain;
 
 namespace StockMarket.Shared.Data;
 
-public class AccountDto
+public class IssuerDto
 {
-    public AccountId Id { get; set; }
-    public TraderId TraderId { get; set; }
-    public decimal Balance { get; set; }
-    public CurrencyId CurrencyId { get; set; }
+    public IssuerId Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
 
-    public AccountDto()
+    public IssuerDto()
     {
     }
 
-    public static AccountDto Create(
-        AccountId id,
-        TraderId traderId,
-        decimal balance,
-        CurrencyId currencyId
-        )
+    public static IssuerDto Create(IssuerId id, string name, string description)
     {
-        var dto = new AccountDto();
+        var dto = new IssuerDto();
         dto.Id = id;
-        dto.TraderId = traderId;
-        dto.Balance = balance;
-        dto.CurrencyId = currencyId;
+        dto.Name = name;
+        dto.Description = description;
         return dto;
     }
 
-    public List<AccountDto> BulkConvert(IEnumerable<Account> Accounts)
+    public List<IssuerDto> BulkConvert(IEnumerable<Issuer> issuers)
     {
-        var list = new List<AccountDto>();
-        foreach(var Account in Accounts)
+        var list = new List<IssuerDto>();
+        foreach(var issuer in issuers)
         {
-            var dto = AccountDto.Create(
-                Account.Id, 
-                Account.TraderId, 
-                Account.Balance,
-                Account.CurrencyId
-                );
+            var dto = IssuerDto.Create(issuer.Id, issuer.Name, issuer.Description);
             list.Add(dto);
         }
         return list;

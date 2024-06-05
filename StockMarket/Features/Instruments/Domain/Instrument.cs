@@ -1,6 +1,7 @@
 ﻿using StockMarket.Features.InstrumentTypes.Domain;
 using StockMarket.Features.Industries.Domain;
 using StockMarket.Features.Issuers.Domain;
+using StockMarket.Features.Currencies.Domain;
 
 namespace StockMarket.Features.Instruments.Domain
 {
@@ -14,43 +15,34 @@ namespace StockMarket.Features.Instruments.Domain
         public Code Code { get; private set; }
         public InstrumentTypeId InstrumentTypeId { get; private set; }
         public IndustryId IndustryId { get; private set; }
-        public IssuerId IssuerId { get; private set; }
+        public string IssuerName { get; private set; }
+        public string Description { get; private set; }
+        public decimal MarketPrice { get; private set; }
+        public CurrencyId CurrencyId { get; private set; }
         public bool IsActive { get; private set; }
-        public List<Instrument> SubInstruments { get; private set; }
 
         public Instrument(
                 InstrumentId id,
                 Code code,
                 InstrumentTypeId instrumentTypeId,
                 IndustryId industryId,
-                IssuerId issuerId,
-                bool isActive,
-                List<Instrument> subInstruments
+                string issuerName,
+                string description,
+                decimal marketPrice,
+                CurrencyId currencyId,
+                bool isActive
                 )
             {
                 Id = id;
                 Code = code;
                 InstrumentTypeId = instrumentTypeId;
                 IndustryId = industryId;
-                IssuerId = issuerId;
+                IssuerName = issuerName;
+                Description = description;
+                MarketPrice = marketPrice;
+                CurrencyId = currencyId;
                 IsActive = isActive;
-                SubInstruments = subInstruments;
             }
-
-        public void ChangeAttributes(
-            Code code,
-            InstrumentTypeId instrumentTypeId,
-            IndustryId industryId,
-            IssuerId issuerId,
-            bool isActive
-            )
-        {
-            Code = code;
-            InstrumentTypeId = instrumentTypeId;
-            IndustryId = industryId;
-            IssuerId = issuerId;
-            IsActive = isActive;
-        }
 
         public void AddSubInstrument(Instrument instrument,
             InstrumentTypeId fundId)
@@ -61,34 +53,6 @@ namespace StockMarket.Features.Instruments.Domain
                     "У простого инструмента не может быть подчинённых инструментов",
                     nameof(fundId));
             }
-            if (SubInstruments.Contains(instrument))
-            {
-                throw new ArgumentException(
-                    "Такой инструмент уже есть в списке подчинённых инструментов",
-                    nameof(fundId));
-            }
-            SubInstruments.Add(instrument);
-        }
-
-        public void RemoveSubInstument(Instrument instrument)
-        {
-            if (SubInstruments.Count == 0)
-            {
-                throw new ArgumentException(
-                    "Список подчинённых инструментов пуст",
-                    nameof(instrument));
-            }
-            SubInstruments.Remove(instrument);
-        }
-
-        public List<Instrument> GetSubIntruments()
-        {
-            return SubInstruments;
-        }
-
-        public int GetSubInstrumentsCount()
-        {
-            return SubInstruments.Count();
         }
     }
 }

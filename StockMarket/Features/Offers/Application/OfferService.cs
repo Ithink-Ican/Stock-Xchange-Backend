@@ -2,6 +2,7 @@
 using StockMarket.Shared.Infrastructure;
 using StockMarket.Features.Offers.Domain;
 using StockMarket.Features.Offers.Infrastructure;
+using StockMarket.Features.Traders.Domain;
 
 namespace StockMarket.Features.Offers.Application;
 
@@ -12,6 +13,9 @@ public interface IOfferService
     Task<Offer> Get(OfferId id);
     void Update(OfferDto offerDto);
     void Delete(OfferId id);
+    Task<List<Offer>> GetOfferByTraderId(TraderId id);
+    Task<List<Offer>> GetLastFiveSatisfiedByTraderId(TraderId id);
+    Task<List<Offer>> GetLastFiveUnsatisfiedByTraderId(TraderId id);
 }
 
 public class OfferService : IOfferService
@@ -32,8 +36,8 @@ public class OfferService : IOfferService
             offerDto.InstrumentId,
             offerDto.Amount,
             offerDto.Price,
-            offerDto.CurrencyId,
-            offerDto.IsSale
+            offerDto.IsSale,
+            offerDto.IsSatisfied
             );
         _offerRepository.Create(offer);
     }
@@ -49,6 +53,22 @@ public class OfferService : IOfferService
         return _offerRepository.Get(id);
     }
 
+    public Task<List<Offer>> GetOfferByTraderId(TraderId id)
+    {
+        var offers = _offerRepository.GetOfferByTraderId(id);
+        return offers;
+    }
+    public Task<List<Offer>> GetLastFiveSatisfiedByTraderId(TraderId id)
+    {
+        var offers = _offerRepository.GetLastFiveSatisfiedByTraderId(id);
+        return offers;
+    }
+    public Task<List<Offer>> GetLastFiveUnsatisfiedByTraderId(TraderId id)
+    {
+        var offers = _offerRepository.GetLastFiveUnsatisfiedByTraderId(id);
+        return offers;
+    }
+
     public void Update(OfferDto offerDto)
     {
         var offer = new Offer(
@@ -57,8 +77,8 @@ public class OfferService : IOfferService
             offerDto.InstrumentId,
             offerDto.Amount,
             offerDto.Price,
-            offerDto.CurrencyId,
-            offerDto.IsSale
+            offerDto.IsSale,
+            offerDto.IsSatisfied
             );
         _offerRepository.Update(offer);
     }

@@ -2,6 +2,7 @@
 using StockMarket.Features.InstrumentTypes.Domain;
 using StockMarket.Features.Issuers.Domain;
 using StockMarket.Features.Industries.Domain;
+using StockMarket.Features.Currencies.Domain;
 
 namespace StockMarket.Shared.Data;
 
@@ -11,12 +12,12 @@ public class InstrumentDto
     public Code Code { get; set; }
     public InstrumentTypeId InstrumentTypeId { get; set; }
     public IndustryId IndustryId { get; set; }
-    public IssuerId IssuerId { get; set; }
+    public string IssuerName { get; set; }
+    public string Description { get; set; }
+    public decimal MarketPrice { get; set; }
+    public CurrencyId CurrencyId { get; set; }
     public bool IsActive { get; set; }
-    public List<Instrument> SubInstruments { get; set; }
-
-
-public InstrumentDto()
+    public InstrumentDto()
     {
     }
 
@@ -25,9 +26,11 @@ public InstrumentDto()
             Code code,
             InstrumentTypeId instrumentTypeId,
             IndustryId industryId,
-            IssuerId issuerId,
-            bool isActive,
-            List<Instrument> subInstruments
+            string issuerName,
+            string description,
+            decimal marketPrice,
+            CurrencyId currencyId,
+            bool isActive
         )
     {
         var dto = new InstrumentDto();
@@ -35,9 +38,11 @@ public InstrumentDto()
         dto.Code = code;
         dto.InstrumentTypeId = instrumentTypeId;
         dto.IndustryId = industryId;
-        dto.IssuerId = issuerId;
+        dto.IssuerName = issuerName;
+        dto.Description = description;
+        dto.MarketPrice = marketPrice;
+        dto.CurrencyId = currencyId;
         dto.IsActive = isActive;
-        dto.SubInstruments = subInstruments;
 
         return dto;
     }
@@ -52,9 +57,11 @@ public InstrumentDto()
             instrument.Code,
             instrument.InstrumentTypeId,
             instrument.IndustryId,
-            instrument.IssuerId,
-            instrument.IsActive,
-            instrument.SubInstruments
+            instrument.IssuerName,
+            instrument.Description,
+            instrument.MarketPrice,
+            instrument.CurrencyId,
+            instrument.IsActive
             );
             list.Add(dto);
         }

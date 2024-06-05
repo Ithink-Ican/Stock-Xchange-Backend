@@ -12,10 +12,9 @@ public class OfferDto
     public InstrumentId InstrumentId { get; set; }
     public int Amount { get; set; }
     public decimal Price { get; set; }
-    public CurrencyId CurrencyId { get; set; }
     public bool IsSale { get; set; }
     public bool IsSatisfied { get; set; }
-    public DateTime PlacementDate { get; set; }
+    public DateTime? PlacementDate { get; set; }
 
     public OfferDto()
     {
@@ -27,8 +26,9 @@ public class OfferDto
         InstrumentId instrumentId, 
         int amount, 
         decimal price, 
-        CurrencyId currencyId, 
-        bool isSale
+        bool isSale,
+        bool isSatisfied,
+        DateTime? placementDate
         )
     {
         var dto = new OfferDto();
@@ -37,8 +37,9 @@ public class OfferDto
         dto.InstrumentId = instrumentId;
         dto.Amount = amount;
         dto.Price = price;
-        dto.CurrencyId = currencyId;
         dto.IsSale = isSale;
+        dto.IsSatisfied = isSatisfied;
+        dto.PlacementDate = placementDate;
 
         return dto;
     }
@@ -54,8 +55,9 @@ public class OfferDto
                 offer.InstrumentId,
                 offer.Amount,
                 offer.Price,
-                offer.CurrencyId,
-                offer.IsSale
+                offer.IsSale,
+                offer.IsSatisfied,
+                offer.PlacementDate
             );
             list.Add(dto);
         }

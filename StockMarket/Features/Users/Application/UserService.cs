@@ -73,6 +73,7 @@ public class UserService : IUserService
     public string Login(string email, string password)
     {
         var user = _userRepository.Get(email).Result;
+
         if (_passwordEncryptor.ValidatePassword(password, user.Password, user.Salt))
         {
             string token = _jwtTokenGenerator.Generate(user);

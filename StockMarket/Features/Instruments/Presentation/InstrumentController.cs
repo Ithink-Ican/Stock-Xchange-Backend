@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StockMarket.Features.Instruments.Domain;
 using StockMarket.Features.Instruments.Application;
 using StockMarket.Shared.Data;
+using StockMarket.Features.InstrumentTypes.Domain;
 
 namespace StockMarket.Features.Instruments.Presentation
 {
@@ -36,17 +37,26 @@ namespace StockMarket.Features.Instruments.Presentation
         [HttpGet("{id}")]
         public ActionResult<InstrumentDto> GetInstrument(InstrumentId id)
         {
-            var instrument = _service.Get(id).Result;
-            var dto = InstrumentDto.Create(
-                instrument.Id,
-                instrument.Code,
-                instrument.InstrumentTypeId,
-                instrument.IndustryId,
-                instrument.IssuerId,
-                instrument.IsActive,
-                instrument.SubInstruments
-                );
-            return Ok(dto);
+            var instrument = _service.Get(id);
+            return Ok(instrument);
+        }
+
+        [HttpGet("/Instrument/by-code/{code}")]
+        public ActionResult<InstrumentDto> GetByCode(string code)
+        {
+            var instrument = _service.GetByCode(code);
+            return Ok(instrument);
+        }
+
+        [HttpGet("/Instruments/by-type")]
+        public ActionResult<IEnumerable<InstrumentDto>> GetByType([FromQuery] InstrumentTypeId typeId)
+        {
+            var instruments = _service.GetByType(typeId);
+            if (instruments.Count != 0)
+            {
+                return instruments;
+            }
+            return NotFound();
         }
 
         [HttpPut]

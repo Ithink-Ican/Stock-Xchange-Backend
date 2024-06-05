@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StockMarket.Features.Instruments.Domain;
+using StockMarket.Features.InstrumentTypes.Domain;
+using StockMarket.Features.Traders.Domain;
+using StockMarket.Shared.Data;
 using StockMarket.Shared.Infrastructure;
 
 namespace StockMarket.Features.Instruments.Infrastructure
@@ -28,6 +31,22 @@ namespace StockMarket.Features.Instruments.Infrastructure
         {
             var instrument = await _stockMarketDbContext.Instruments.FindAsync(instrumentId);
             return instrument;
+        }
+
+        public async Task<Instrument> GetByCode(Code code)
+        {
+            var instrument = await _stockMarketDbContext.Instruments.Where(
+                i => i.Code == code
+                ).FirstOrDefaultAsync();
+            return instrument;
+        }
+
+        public async Task<List<Instrument>> GetByType(InstrumentTypeId typeId)
+        {
+            var instruments = await _stockMarketDbContext.Instruments.Where(
+                i => i.InstrumentTypeId == typeId
+                ).ToListAsync();
+            return instruments;
         }
 
         public async Task Delete(InstrumentId instrumentId)

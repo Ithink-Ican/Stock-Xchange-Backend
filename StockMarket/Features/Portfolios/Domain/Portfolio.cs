@@ -12,7 +12,7 @@ namespace StockMarket.Features.Portfolios.Domain
 
         public Portfolio(PortfolioId id, TraderId traderId, InstrumentId instrumentId, int amount)
         {
-            if (amount <= 0)
+            if (amount < 0)
             {
                 throw new ArgumentException(
                     "Количество не может быть отрицательнм",
@@ -22,6 +22,21 @@ namespace StockMarket.Features.Portfolios.Domain
             TraderId = traderId;
             InstrumentId = instrumentId;
             Amount = amount;
+        }
+
+        public void ChangeAmount(int amount)
+        {
+            Amount = amount;
+        }
+
+        public void IncreaseAmount(int amount)
+        {
+            Amount += amount;
+        }
+
+        public void DecreaseAmount(int amount)
+        {
+            Amount -= amount;
         }
     }
 }

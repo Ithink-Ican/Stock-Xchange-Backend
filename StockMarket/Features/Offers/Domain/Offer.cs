@@ -11,7 +11,6 @@ namespace StockMarket.Features.Offers.Domain
         public InstrumentId InstrumentId { get; private set; }
         public int Amount { get; private set; }
         public decimal Price { get; private set; }
-        public CurrencyId CurrencyId { get; private set; }
         public bool IsSale { get; private set; }
         public bool IsSatisfied { get; private set; }
         public DateTime PlacementDate { get; private set; }
@@ -21,8 +20,8 @@ namespace StockMarket.Features.Offers.Domain
             TraderId traderId, 
             InstrumentId instrumentId, 
             int amount, decimal price, 
-            CurrencyId currencyId,
-            bool isSale
+            bool isSale,
+            bool isSatisfied
             )
         {
             if (price <= 0)
@@ -42,10 +41,9 @@ namespace StockMarket.Features.Offers.Domain
             InstrumentId = instrumentId;
             Amount = amount;
             Price = price;
-            CurrencyId = currencyId;
             IsSale = isSale;
             PlacementDate = DateTime.Now;
-            IsSatisfied = false;
+            IsSatisfied = isSatisfied;
         }
 
         public void ChangeAttributes(TraderId traderId, InstrumentId instrumentId, int amount, decimal price, CurrencyId currencyId, bool isSale, bool isSatisfied)
@@ -67,7 +65,6 @@ namespace StockMarket.Features.Offers.Domain
             InstrumentId = instrumentId;
             Amount = amount;
             Price = price;
-            CurrencyId = currencyId;
             IsSale = isSale;
             IsSatisfied = isSatisfied;
         }
